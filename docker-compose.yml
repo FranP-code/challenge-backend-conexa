@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    links:
+      - db
+    volumes:
+      - .:/usr/src
+      - /usr/src/node_modules
+    environment:
+      MONGO_URI: mongodb://db/appdb
+      NODE_ENV: "development"
+      PORT: 8080
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+volumes:
+  mongo_data:
