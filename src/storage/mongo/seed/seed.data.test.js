@@ -1,5 +1,5 @@
-import { emailRegex } from '../common/constants';
-import seedData from './seed.data';
+const { emailRegex } = require('../../../common/constants');
+const { default: seedData } = require('./seed.data');
 
 describe('expected workflow for seed.data', () => {
   test('data generated properties checking', () => {
@@ -22,9 +22,12 @@ describe('expected workflow for seed.data', () => {
       const nameInEmail = obj.email.substring(0, atSignIndex);
       const serverInEmail = obj.email.substring(atSignIndex);
       const [firstName, lastName] = obj.name.split(' ');
-      expect(nameInEmail).toEqual(
+      const [numbers] = nameInEmail.match(/\d+$/);
+      const [rest] = nameInEmail.match(/^[^\d]+/);
+      expect(rest).toEqual(
         `${firstName.toLowerCase()}.${lastName.toLowerCase()}`
       );
+      expect(parseInt(numbers, 10)).toStrictEqual(expect.any(Number));
       expect(serverInEmail.length).toBeGreaterThan(4);
       expect(serverInEmail).toEqual(expect.stringMatching(/^.+\.com$/));
     });

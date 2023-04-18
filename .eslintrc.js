@@ -30,7 +30,8 @@ module.exports = {
     'jest/no-identical-title': 'error',
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error',
-    'sort-keys-fix/sort-keys-fix': 'error'
+    'sort-keys-fix/sort-keys-fix': 'error',
+    '@typescript-eslint/return-await': 'off'
   },
   env: {
     'jest/globals': true

@@ -6,10 +6,11 @@ require('module-alias/register');
 import express from 'express';
 import { login, register } from './routes';
 import config from '../config';
-import { Storage } from '@/storage';
+import storage from '@/storage/remote';
 
 const app = express();
-const storage = Storage();
+
+app.use(express.json());
 
 app.post('/login', (req, res) => login(req, res, storage));
 

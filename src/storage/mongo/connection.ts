@@ -4,7 +4,7 @@ import { isProd } from '../../common/utils';
 import seed from './seed';
 
 export default async () => {
-  await mongoose.connect(config.mongo.url as string);
+  await mongoose.connect(config.mongo.url);
   if (!isProd()) {
     await seed();
   }

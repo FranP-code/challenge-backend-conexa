@@ -1,4 +1,4 @@
-import { pickRandomValue } from '@/common/utils';
+import { pickRandomValue } from '../../../common/utils';
 
 export default (length: number) => {
   const generatePassword = () =>

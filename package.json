@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -L src/app.ts",
-    "pre-commit-test": "jest",
+    "dev": "nodemon src/api/app.ts",
+    "pre-commit-test": "jest src",
     "prepare": "husky install",
     "start": "npx tsc && node dist/api/index.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "pm2": "npx tsc && pm2-runtime ecosystem.config.js"
   },
   "lint-staged": {
     "**/*": [
@@ -23,9 +24,11 @@
     "@": "./dist"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.2",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
+    "@types/node-fetch": "^2.6.3",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.0.1",
@@ -42,11 +45,14 @@
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "module-alias": "^2.2.2",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.3",
+    "node-fetch": "^2.6.9"
   }
 }
