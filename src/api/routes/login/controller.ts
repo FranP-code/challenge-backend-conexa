@@ -1,33 +1,31 @@
 import { type Request, type Response } from 'express';
-import { type User, type Storage } from '@/common/types';
-import response from '@/network/response';
-import { sign } from '@/auth/remote';
+import { type User } from '@/common/types';
+import { getUsers } from '@/app/remote';
+import { handleError } from '@/common/utils';
+import { signToken } from '@/auth/remote';
 import bcrypt from 'bcrypt';
+import response from '@/network/response';
 
-export default async (req: Request, res: Response, storage: Storage) => {
+export default async (req: Request, res: Response) => {
   try {
     if (!req.body.email || !req.body.password) {
       throw new Error('Missing values email/password');
     }
-    const storageResponse = await storage.queries.getUsers({
+    const storageResponse = await getUsers({
       email: req.body.email
     });
-    const [value] = storageResponse.body as unknown as User[];
+    const [value] = storageResponse.data as unknown as User[];
     if (!value) {
       throw new Error('User not found');
     }
-    const { email, name, password } = value;
+    const { _id, email, name, password } = value;
     const passwordMatch = await bcrypt.compare(req.body.password, password);
     if (!passwordMatch) {
       throw new Error("Password don't match");
     }
-    const token = await sign(value);
+    const { token } = await signToken(_id);
     response.success(res, { email, name, token }, 200);
   } catch (error) {
-    if (error instanceof Error) {
-      response.error(res, { error: error.message }, 400);
-      return;
-    }
-    response.error(res, { error: 'unknown error' }, 500);
+    handleError(res, error);
   }
 };

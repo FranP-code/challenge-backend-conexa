@@ -1,7 +1,11 @@
 module.exports = [
   {
-    name: 'app',
+    name: 'api',
     script: 'dist/api/index.js'
+  },
+  {
+    name: 'app',
+    script: 'dist/app/index.js'
   },
   {
     name: 'auth',

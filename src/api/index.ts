@@ -3,20 +3,21 @@
 /* eslint-disable @typescript-eslint/await-thenable */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 require('module-alias/register');
-import express from 'express';
-import { login, register } from './routes';
+import { getUsers, login, register } from './routes';
 import config from '../config';
-import storage from '@/storage/remote';
+import express from 'express';
 
 const app = express();
 
 app.use(express.json());
 
-app.post('/login', (req, res) => login(req, res, storage));
+app.get('/get-users', getUsers);
 
-app.post('/register', (req, res) => register(req, res, storage));
+app.post('/login', login);
+
+app.post('/register', register);
 
 app.listen(config.api.port, () => {
   // eslint-disable-next-line no-console
-  console.log('USER up', config.api);
+  console.log('API up', config.api);
 });

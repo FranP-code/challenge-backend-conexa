@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
 require('module-alias/register');
-import express from 'express';
 import bodyParser from 'body-parser';
 import config from '@/config';
+import express from 'express';
 import router from './router';
 
 const app = express();

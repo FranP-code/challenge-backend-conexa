@@ -1,10 +1,10 @@
 /* eslint-disable import/first */
 require('module-alias/register');
-import express from 'express';
 import bodyParser from 'body-parser';
 import config from '@/config';
-import router from './router';
 import connection from './mongo/connection';
+import express from 'express';
+import router from './router';
 
 const app = express();
 void connection();

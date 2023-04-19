@@ -1,4 +1,5 @@
-import register from './register/controller';
+import getUsers from './getUsers/controller';
 import login from './login/controller';
+import register from './register/controller';
 
-export { login, register };
+export { login, register, getUsers };

@@ -4,7 +4,12 @@ module.exports = {
     es2021: true
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'jest', 'sort-keys-fix'],
+  plugins: [
+    '@typescript-eslint',
+    'jest',
+    'sort-keys-fix',
+    'sort-imports-es6-autofix'
+  ],
   extends: ['standard-with-typescript', 'prettier'],
   parserOptions: {
     project: './tsconfig.json',
@@ -31,7 +36,15 @@ module.exports = {
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error',
     'sort-keys-fix/sort-keys-fix': 'error',
-    '@typescript-eslint/return-await': 'off'
+    '@typescript-eslint/return-await': 'off',
+    'sort-imports-es6-autofix/sort-imports-es6': [
+      2,
+      {
+        ignoreCase: false,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single']
+      }
+    ]
   },
   env: {
     'jest/globals': true

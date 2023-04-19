@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import config from '../../config';
 import { isProd } from '../../common/utils';
+import config from '../../config';
+import mongoose from 'mongoose';
 import seed from './seed';
 
 export default async () => {

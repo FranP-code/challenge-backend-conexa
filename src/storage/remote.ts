@@ -1,9 +1,15 @@
-import { type User, type QueryCondition, type Storage } from '@/common/types';
+import {
+  type Mutations,
+  type Options,
+  type Queries,
+  type QueryCondition,
+  type User
+} from '@/common/types';
 import { request } from '@/common/utils';
 
-const getUsers = async (condition?: QueryCondition) => {
+const getUsers = async (condition?: QueryCondition, options?: Options) => {
   return await request('get-users', 'GET', 'store', {
-    headers: { condition }
+    headers: { condition, options }
   });
 };
 
@@ -11,11 +17,10 @@ const registerUser = async (body: User) => {
   return await request('register-user', 'POST', 'store', { body });
 };
 
-export default {
-  mutations: {
-    registerUser
-  },
-  queries: {
-    getUsers
-  }
-} satisfies Storage;
+export const mutations = {
+  registerUser
+} satisfies Mutations;
+
+export const queries = {
+  getUsers
+} satisfies Queries;

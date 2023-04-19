@@ -10,5 +10,5 @@ export const registerUser = async (body: User) => {
     name,
     password: await bcrypt.hash(password, config.auth.hashSaltTimes)
   });
-  return userSchemaCreate.save();
+  return (await userSchemaCreate.save()).toObject();
 };

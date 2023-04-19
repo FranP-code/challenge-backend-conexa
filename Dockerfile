@@ -1,13 +1,13 @@
 FROM node:latest
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm pm2
 
 WORKDIR /usr/src
 
-COPY [".", "/usr/src"]
+COPY ["./package.json", "/usr/src/package.json"]
 
 RUN pnpm i
 
-RUN npm i -g pm2
+COPY [".", "/usr/src"]
 
 CMD ["pnpm", "pm2"]
