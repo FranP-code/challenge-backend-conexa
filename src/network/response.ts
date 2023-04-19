@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { isProd } from '@/common/utils';
 import { type Response } from 'express';
 
 export default {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   error: (res: Response, body: Object, status?: number) => {
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const statusCode = (!isProd() && status) || 500;
     const bodyData = isProd() ? 'Internal Server Error' : body;
     res.status(statusCode).send({
@@ -13,7 +13,6 @@ export default {
       status: statusCode
     });
   },
-  // eslint-disable-next-line @typescript-eslint/ban-types
   success: (res: Response, body: Object, status: number) => {
     res.status(status).send({
       body,
