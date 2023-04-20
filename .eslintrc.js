@@ -22,7 +22,9 @@ module.exports = {
     'Dockerfile',
     'docker-compose.yml',
     'package.json',
-    'tsconfig.json'
+    'tsconfig.json',
+    'README.md',
+    'insomnia_request.json'
   ],
   rules: {
     semi: 'off',
