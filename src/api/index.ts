@@ -6,6 +6,8 @@ require('module-alias/register');
 import { getUsers, login, register } from './routes';
 import config from '../config';
 import express from 'express';
+import swaggerDoc from './swagger';
+import swaggerUi from 'swagger-ui-express';
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.get('/get-users', getUsers);
 app.post('/login', login);
 
 app.post('/register', register);
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.listen(config.api.port, () => {
   // eslint-disable-next-line no-console

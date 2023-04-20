@@ -26,7 +26,13 @@ export default async (req: Request, res: Response) => {
       if (!user) throw new Error('User not found');
     }
     const queryData: Array<Record<string, any>> = [{ email }, { limit, page }];
-    const users = await getUsers(...queryData);
+    const users = {
+      users: (await getUsers(...queryData)).users.map((a: any) => ({
+        _id: a._id,
+        email: a.email,
+        name: a.name
+      }))
+    };
     response.success(res, users, 200);
   } catch (error) {
     if (error instanceof Error) {
