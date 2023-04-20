@@ -10,6 +10,17 @@ Se puede acceder a la API desde:
 - Documentación (Swagger) - https://franp-conexa.up.railway.app/docs
 - Archivo con requests (Insomnia) - `/insomnia_request.json`
 
+## Acceso desde local
+
+Para levantar el servidor de la API junto con sus microservicios, esta preparada una imagen de docker junto con su respectivo Docker Compose que lo conecta con la base de datos de mongo.
+
+Para levantarlo, esta preparado el comando `docker-compose up`.
+
+En caso de no querer levantar la base de datos y querer acceder a una instancia de Mongo en remoto:
+1. Definir el link de la base de datos en el archivo `.env`
+2. Definir el puerto de la API en el archivo `.env`
+3. Levantar unicamente la imagen de la app con el comando `docker build -t franp-conexa . && docker run -p PORT:PORT franp-conexa` siendo `PORT` el puerto definido en el archivo `.env`
+
 # Microservicios
 
 Los microservicios definidos son:
