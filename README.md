@@ -6,8 +6,8 @@ Documentación sobre el Challenge, tanto en lo técnico como al rededor de su de
 
 Se puede acceder a la API desde:
 
-- API Link: https://franp.site/backend-challenge-conexa
-- Documentación (Swagger) - https://franp.site/backend-challenge-conexa/docs
+- API Link: https://franp-conexa.onrender.com
+- Documentación (Swagger) - https://franp-conexa.onrender.com/docs
 - Archivo con requests (Insomnia) - `/insomnia_request.json`
 
 # Microservicios
