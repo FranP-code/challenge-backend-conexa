@@ -1,20 +1,23 @@
 import { type Request, type Response } from 'express';
-import { type User } from '@/common/types';
+import { type User, type UserLoginInput } from '@/common/types';
+import { checkObjectType, handleError } from '@/common/utils';
 import { getUsers } from '@/app/remote';
-import { handleError } from '@/common/utils';
 import { signToken } from '@/auth/remote';
 import bcrypt from 'bcrypt';
 import response from '@/network/response';
 
 export default async (req: Request, res: Response) => {
   try {
-    if (!req.body.email || !req.body.password) {
-      throw new Error('Missing values email/password');
-    }
+    checkObjectType<UserLoginInput>({
+      email: req.body.email,
+      password: req.body.password
+    });
     const storageResponse = await getUsers({
       email: req.body.email
     });
-    const [value] = storageResponse.data as unknown as User[];
+    const {
+      users: [value]
+    } = storageResponse as { users: User[] };
     if (!value) {
       throw new Error('User not found');
     }

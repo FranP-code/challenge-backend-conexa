@@ -84,20 +84,46 @@ export const optionalParseObject = (obj: any) => {
 
 export const handleError = (res: Response, error: unknown) => {
   const errorValue = optionalParseObject(error);
-
+  if (error && (errorValue as { code: number }).code === 11000) {
+    const value = optionalParseObject(errorValue.messages);
+    response.error(
+      res,
+      { error: { ...value, duplicatedValue: value.keyValue } },
+      400
+    );
+    return;
+  }
   if (error instanceof Error) {
-    response.error(res, { error: errorValue.message }, 400);
+    response.error(
+      res,
+      { error: optionalParseObject(errorValue.message) },
+      400
+    );
     return;
   }
   if (error instanceof JsonWebTokenError) {
-    response.error(res, { error: errorValue.name }, 400);
+    response.error(res, { error: optionalParseObject(errorValue.name) }, 400);
     return;
   }
-  response.error(res, error || 'unknown error', 500);
+  response.error(res, errorValue || 'unknown error', 500);
 };
 
 export const extractToken = (authorization: string) => {
   const bearerString = 'Bearer ';
   if (!authorization.includes(bearerString)) throw new Error('Invalid format');
   return authorization.replace(bearerString, '');
+};
+
+export const checkObjectType = <T>(obj: unknown): T => {
+  const myObj = obj as T;
+  if (
+    !myObj ||
+    typeof myObj !== 'object' ||
+    Object.keys(myObj).some(
+      (key) => typeof myObj[key as keyof T] === 'undefined'
+    )
+  ) {
+    throw new Error(`Missing properties`);
+  }
+  return myObj;
 };

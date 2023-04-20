@@ -16,8 +16,17 @@ export interface User {
   password: string;
 }
 
+export interface UserLoginInput {
+  email: string;
+  password: string;
+}
+
+export interface GetUsersRequiredInput {
+  authorization: string;
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type QueryCondition = Object;
+export type QueryCondition = any;
 
 export interface Options {
   limit?: string;

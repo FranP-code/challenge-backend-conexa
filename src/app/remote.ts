@@ -2,6 +2,7 @@ import { request } from '@/common/utils';
 
 export const getUsers = async (
   condition?: {
+    _id?: string;
     email?: string;
   },
   options?: {

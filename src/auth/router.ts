@@ -19,11 +19,7 @@ router.get('/token-data', (req, res) => {
   try {
     const authorization = req.headers.authorization ?? '';
     const token = extractToken(authorization);
-    response.success(
-      res,
-      { value: jwt.verify(token, config.auth.secretValue) },
-      200
-    );
+    response.success(res, jwt.verify(token, config.auth.secretValue), 200);
   } catch (error) {
     handleError(res, error);
   }

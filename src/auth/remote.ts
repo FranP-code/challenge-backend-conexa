@@ -2,7 +2,7 @@ import { request } from '@/common/utils';
 
 export const signToken = async (data: any) => {
   return await request('sign-token', 'POST', 'auth', {
-    body: { data: JSON.stringify(data) }
+    body: { data }
   });
 };
 
