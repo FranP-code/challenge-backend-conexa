@@ -10,7 +10,6 @@ services:
       - db
     volumes:
       - .:/usr/src
-      - /usr/src/node_modules
     environment:
       MONGO_URI: mongodb://db/appdb
       NODE_ENV: 'development'
