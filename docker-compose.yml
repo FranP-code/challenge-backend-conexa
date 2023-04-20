@@ -13,12 +13,20 @@ services:
       - /usr/src/node_modules
     environment:
       MONGO_URI: mongodb://db/appdb
-      NODE_ENV: "development"
-      PORT: 8080
+      NODE_ENV: 'development'
+      STORE_PORT: ${STORE_PORT}
+      AUTH_PORT: ${AUTH_PORT}
+      APP_PORT: ${APP_PORT}
+      PORT: ${PORT}
+      APP_URL: ${APP_URL}
+      AUTH_HASH_SALT_TIMES: ${AUTH_HASH_SALT_TIMES}
+      AUTH_SECRET_VALUE: ${AUTH_SECRET_VALUE}
+      AUTH_URL: ${AUTH_URL}
+      STORE_URL: ${STORE_URL}
   db:
     image: mongo
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongo_data:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
